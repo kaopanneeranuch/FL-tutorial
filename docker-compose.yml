@@ -10,6 +10,8 @@ services:
     environment:
       - NUM_ROUNDS=3
     restart: always
+    volumes:
+      - ./server:/app
 
   # Client 0
   client0:
@@ -23,6 +25,8 @@ services:
       - PARTITION_ID=0
       - SERVER_ADDRESS=server:8080
     restart: always
+    volumes:
+      - ./client:/app
 
   # Client 1
   client1:
@@ -36,7 +40,8 @@ services:
       - PARTITION_ID=1
       - SERVER_ADDRESS=server:8080
     restart: always
-
+    volumes:
+      - ./client:/app 
   # Client 2
   client2:
     build:
@@ -49,3 +54,5 @@ services:
       - PARTITION_ID=2
       - SERVER_ADDRESS=server:8080
     restart: always
+    volumes:
+      - ./client:/app

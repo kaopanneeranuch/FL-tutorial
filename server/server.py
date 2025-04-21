@@ -15,7 +15,6 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 # Load and initialize the model
 net = SimpleModel()
 initial_parameters = ndarrays_to_parameters(get_weights(net))
-# or from utils if you merged
 
 testset = load_testset()
 

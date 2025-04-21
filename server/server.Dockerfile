@@ -3,11 +3,10 @@ FROM python:3.11-slim
 
 WORKDIR /app/server
 
-COPY server/ .             
+COPY . .
 COPY ../utils.py /app/utils.py       
 COPY ../requirements.txt requirements.txt
 
-# Install dependencies
 RUN pip install -r requirements.txt
 
 # Expose server port

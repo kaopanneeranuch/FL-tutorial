@@ -1,0 +1,51 @@
+services:
+  # Flower Server
+  server:
+    build:
+      context: .
+      dockerfile: server/server.Dockerfile
+    container_name: flwr-server
+    ports:
+      - "8080:8080"
+    environment:
+      - NUM_ROUNDS=3
+    restart: always
+
+  # Client 0
+  client0:
+    build:
+      context: .
+      dockerfile: client/client.Dockerfile
+    container_name: flwr-client0
+    depends_on:
+      - server
+    environment:
+      - PARTITION_ID=0
+      - SERVER_ADDRESS=server:8080
+    restart: always
+
+  # Client 1
+  client1:
+    build:
+      context: .
+      dockerfile: client/client.Dockerfile
+    container_name: flwr-client1
+    depends_on:
+      - server
+    environment:
+      - PARTITION_ID=1
+      - SERVER_ADDRESS=server:8080
+    restart: always
+
+  # Client 2
+  client2:
+    build:
+      context: .
+      dockerfile: client/client.Dockerfile
+    container_name: flwr-client2
+    depends_on:
+      - server
+    environment:
+      - PARTITION_ID=2
+      - SERVER_ADDRESS=server:8080
+    restart: always

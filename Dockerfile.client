@@ -1,0 +1,24 @@
+# Use Python base image
+FROM python:3.11-slim
+
+WORKDIR /app/client
+
+COPY ./requirements.txt /app/requirements.txt
+RUN pip install -r /app/requirements.txt
+
+COPY ./utils.py /app/utils.py
+
+# COPY ./client /app/client/
+COPY ./dataset/part0.pt ./client/client_data/part0.pt
+COPY ./dataset/part1.pt ./client/client_data/part1.pt
+COPY ./dataset/part2.pt ./client/client_data/part2.pt
+COPY ./dataset/testset.pt ./client/client_data/testset.pt
+COPY ./dataset/testset_137.pt ./client/client_data/testset_137.pt
+COPY ./dataset/testset_258.pt ./client/client_data/testset_258.pt
+COPY ./dataset/testset_469.pt ./client/client_data/testset_469.pt
+
+# Set environment variables
+ENV PARTITION_ID=0
+
+# Set the default command to run the client script
+CMD ["python", "client.py"]

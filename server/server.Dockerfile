@@ -3,11 +3,12 @@ FROM python:3.11-slim
 
 WORKDIR /app/server
 
-COPY . .
-COPY ../utils.py /app/utils.py       
 COPY ../requirements.txt requirements.txt
-
 RUN pip install -r requirements.txt
+
+COPY ../utils.py /app/utils.py 
+
+COPY . .      
 
 # Expose server port
 EXPOSE 8080
